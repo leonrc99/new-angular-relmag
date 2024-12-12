@@ -1,0 +1,19 @@
+.register-container {
+    width: 400px;
+    margin: 0 auto;
+    h1 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .error-message {
+        color: red;
+        font-size: 0.9em;
+      }
+    }
+    button {
+      margin-top: 10px;
+    }
+  }

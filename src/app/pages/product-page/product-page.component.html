@@ -1,0 +1,31 @@
+
+<div *ngIf="isLoading" class="loading">
+    <p>Carregando produto...</p>
+  </div>
+  
+  <div *ngIf="!isLoading && product">
+    <div class="product-details">
+      <h1>{{ product.name }}</h1>
+      <div class="product-images">
+        <!-- Slider ou galeria de imagens -->
+        <img [src]="product.image" alt="{{ product.name }}" />
+      </div>
+      <p class="price">Preço: {{ product.price | currency: 'BRL' }}</p>
+      <p class="description">{{ product.description }}</p>
+  
+      <div class="actions">
+       <!--  <button (click)="addToCart()">Adicionar ao Carrinho</button> -->
+        <button>Comprar Agora</button>
+      </div>
+    </div>
+  
+    <div class="related-products" *ngIf="relatedProducts.length > 0">
+      <h2>Produtos Relacionados</h2>
+      <div class="product-card" *ngFor="let related of relatedProducts">
+        <img [src]="related.image" alt="{{ related.name }}" />
+        <h4>{{ related.name }}</h4>
+        <p>{{ related.price | currency: 'BRL' }}</p>
+        <button routerLink="/product/{{ related.id }}">Ver Detalhes</button>
+      </div>
+    </div>
+  </div>

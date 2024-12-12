@@ -1,0 +1,243 @@
+
+<div class="flex flex-col justify-center items-center w-full my-10">
+  <h1 class="text-xl font-bold text-purple-900 mb-8">Registrar</h1>
+
+  <form
+    class="grid grid-cols-1 gap-8 w-full px-10"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="md:grid md:grid-cols-2 gap-8">
+      <div>
+        <label class="block mb-2 text-sm font-medium text-purple-900" for="name"
+          >Nome</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="name"
+          type="text"
+          formControlName="name"
+        />
+        <div
+          *ngIf="
+            registerForm.get('name')?.invalid &&
+            registerForm.get('name')?.touched
+          "
+        >
+          O nome é obrigatório e deve ter pelo menos 3 caracteres.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="email"
+          >E-mail</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="email"
+          type="email"
+          formControlName="email"
+        />
+        <div
+          *ngIf="
+            registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched
+          "
+        >
+          Por favor, insira um e-mail válido.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="password"
+          >Senha</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="password"
+          type="password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
+          "
+        >
+          A senha deve ter pelo menos 8 caracteres.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="confirmPassword"
+          >Confirmar Senha</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+        />
+        <div
+          *ngIf="
+            registerForm.get('confirmPassword')?.invalid &&
+            registerForm.get('confirmPassword')?.touched
+          "
+        >
+          Por favor, confirme sua senha.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="phoneNumber"
+          >Telefone</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="phoneNumber"
+          type="text"
+          formControlName="phoneNumber"
+        />
+        <div
+          *ngIf="
+            registerForm.get('phoneNumber')?.invalid &&
+            registerForm.get('phoneNumber')?.touched
+          "
+        >
+          O número de telefone deve ser no formato internacional, ex:
+          +12123456789.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="dateOfBirth"
+          >Data de Nascimento</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="dateOfBirth"
+          type="date"
+          formControlName="dateOfBirth"
+        />
+        <div
+          *ngIf="
+            registerForm.get('dateOfBirth')?.invalid &&
+            registerForm.get('dateOfBirth')?.touched
+          "
+        >
+          Por favor, insira uma data válida.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="address"
+          >Endereço</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="address"
+          type="text"
+          formControlName="address"
+        />
+        <div
+          *ngIf="
+            registerForm.get('address')?.invalid &&
+            registerForm.get('address')?.touched
+          "
+        >
+          O endereço é obrigatório.
+        </div>
+      </div>
+
+      <div>
+        <label class="block mb-2 text-sm font-medium text-purple-900" for="city"
+          >Cidade</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="city"
+          type="text"
+          formControlName="city"
+        />
+        <div
+          *ngIf="
+            registerForm.get('city')?.invalid &&
+            registerForm.get('city')?.touched
+          "
+        >
+          A cidade é obrigatória.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="state"
+          >Estado</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="state"
+          type="text"
+          formControlName="state"
+        />
+        <div
+          *ngIf="
+            registerForm.get('state')?.invalid &&
+            registerForm.get('state')?.touched
+          "
+        >
+          O estado é obrigatório.
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-purple-900"
+          for="country"
+          >País</label
+        >
+        <input
+          class="bg-gray-50 border mb-6 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          id="country"
+          type="text"
+          formControlName="country"
+        />
+        <div
+          *ngIf="
+            registerForm.get('country')?.invalid &&
+            registerForm.get('country')?.touched
+          "
+        >
+          O país é obrigatório.
+        </div>
+      </div>
+    </div>
+    <button
+      class="w-full border-purple-900 cursor-pointer bg-white text-purple-900 border-2 py-2 rounded-full text-base font-semibold hover:text-white hover:bg-purple-900 transition"
+      type="submit"
+      [disabled]="isSubmitting"
+    >
+      Registrar
+    </button>
+  </form>
+  <div
+    *ngIf="errorMessage"
+    class="p-4 mb-4 flex text-sm items-center justify-center text-red-800 rounded-lg bg-red-200 w-80"
+    role="alert"
+  >
+    <span class="font-medium text-center">{{ errorMessage }}</span>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="flex flex-col justify-center items-center w-full h-full my-10">
+  <h1 class="text-xl font-bold text-purple-900 mb-8">Entra na sua conta</h1>
+  <div
+    *ngIf="userNotFound"
+    class="p-4 mb-4 flex text-sm items-center justify-center text-red-800 rounded-lg bg-red-200 w-80"
+    role="alert"
+  >
+    <span class="font-medium text-center">Usuário não encontrado!</span>
+  </div>
+  <form
+    class="flex flex-col w-80"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <label for="email" class="block mb-2 text-sm font-medium text-purple-900"
+      >E-mail</label
+    >
+    <input
+      class="bg-gray-50 border mb-4 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      id="email"
+      formControlName="email"
+      type="email"
+    />
+    <div
+      class="p-4 mb-4 mt-0 flex text-sm items-center justify-center text-red-800 rounded-lg bg-red-200 w-80"
+      role="alert"
+      *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+    >
+      <small *ngIf="loginForm.get('email')?.hasError('required')"
+        >E-mail é obrigatório.</small
+      >
+      <small *ngIf="loginForm.get('email')?.hasError('email')"
+        >E-mail inválido.</small
+      >
+    </div>
+
+    <label for="password" class="block mb-2 text-sm font-medium text-purple-900"
+      >Senha:</label
+    >
+    <input
+      id="password"
+      formControlName="password"
+      type="password"
+      class="bg-gray-50 border mb-4 border-gray-300 text-purple-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    />
+    <div
+      class="p-4 mb-4 mt-0 flex text-sm items-center justify-center text-red-800 rounded-lg bg-red-200 w-80"
+      role="alert"
+      *ngIf="
+        loginForm.get('password')?.invalid && loginForm.get('password')?.touched
+      "
+    >
+      <small *ngIf="loginForm.get('password')?.hasError('required')"
+        >Senha é obrigatória.</small
+      >
+      <small *ngIf="loginForm.get('password')?.hasError('minlength')"
+        >Senha deve ter pelo menos 6 caracteres.</small
+      >
+    </div>
+
+    <div class="flex flex-col items-center justify-center">
+      <button
+        class="border-purple-900 cursor-pointer bg-white w-1/2 text-purple-900 border-2 py-1 px-8 mt-8 rounded-full text-sm font-semibold hover:text-white hover:bg-purple-900 transition"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Entrar
+      </button>
+      <div class="flex gap-1 text-purple-900 p-2">
+        <p class="font-normal">ou</p>
+        <button class="font-normal underline hover:font-medium transition-all" routerLink="/register">Cadastre-se</button>
+      </div>
+    </div>
+  </form>
+</div>

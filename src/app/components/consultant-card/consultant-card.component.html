@@ -1,0 +1,21 @@
+<div
+  class="flex flex-col justify-around items-center h-96 w-60 px-6 py-4 border-2 rounded-md bg-white border-purple-700 text-center cursor-pointer hover:w-64 hover:h-[25rem] transition-all"
+>
+  <img
+    class="w-44 border-4 rounded-full border-purple-700"
+    src="{{ imageUrl }}"
+    alt=""
+    (click)="goToPage(consultantId)"
+  />
+  <h3 class="text-xl font-bold text-purple-900" routerLink="/product/{{ consultantId }}">{{ consultantName }}</h3>
+  <div class="flex flex-col justify-center items-center gap-0" routerLink="/product/{{ consultantId }}">
+    <p class="text-xs font-light text-purple-900">{{ consultantSpecialties }}</p>
+    <p class="text-lg font-semibold text-purple-900">{{ consultantPrice || 0 | currency : "BRL" }}/min</p>
+  </div>
+  <button
+    class="border-purple-900 cursor-pointer bg-white w-50 text-purple-900 border py-1 px-8 rounded-full text-sm font-semibold hover:text-white hover:bg-purple-900 transition"
+    (click)="goToPage(consultantId)"
+  >
+    Contratar Agora
+  </button>
+</div>

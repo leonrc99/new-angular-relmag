@@ -1,0 +1,76 @@
+<div *ngIf="!isLoading && consultant" class="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg">
+  <!-- Consultant Profile -->
+  <div class="flex flex-col items-center text-center space-y-4">
+    <img
+      [src]="consultant.imageUrl"
+      [alt]="consultant.user.name"
+      class="w-32 h-32 rounded-full shadow-md"
+    />
+    <h1 class="text-2xl font-bold text-gray-800">{{ consultant.user.name }}</h1>
+    <p class="text-gray-600">{{ consultant.bio }}</p>
+    <span class="inline-block px-3 py-1 text-sm font-medium text-white bg-purple-600 rounded">
+      {{ consultant.specialties }}
+    </span>
+  </div>
+
+  <!-- Schedule Appointment -->
+  <div class="mt-8">
+    <h2 class="text-xl font-semibold text-gray-800">Agendar Consulta</h2>
+    <form
+      [formGroup]="appointmentForm"
+      (ngSubmit)="scheduleAppointment()"
+      class="space-y-4 mt-4"
+    >
+      <!-- Date Selection -->
+      <div>
+        <label for="date" class="block text-sm font-medium text-gray-700">Data</label>
+        <select
+          id="date"
+          formControlName="date"
+          (change)="onDateChange($event)"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500"
+        >
+          <option *ngFor="let date of availableDates" [value]="date">{{ date | date: 'dd/MM/yyyy' }}</option>
+        </select>
+      </div>
+
+      <!-- Time Selection -->
+      <div *ngIf="availableTimes.length > 0">
+        <label for="startTime" class="block text-sm font-medium text-gray-700">Horário Inicial</label>
+        <select
+          id="startTime"
+          formControlName="startTime"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500"
+          (change)="updateAvailableEndTimes()"
+        >
+          <option *ngFor="let time of availableTimes" [value]="time">{{ time }}</option>
+        </select>
+      </div>
+
+      <div *ngIf="availableEndTimes.length > 0">
+        <label for="endTime" class="block text-sm font-medium text-gray-700">Horário Final</label>
+        <select
+          id="endTime"
+          formControlName="endTime"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-full shadow-sm focus:ring-purple-500 focus:border-purple-500"
+          (change)="updateTotalPrice()"
+        >
+          <option *ngFor="let time of availableEndTimes" [value]="time">{{ time }}</option>
+        </select>
+      </div>
+
+      <!-- Total Price -->
+      <div class="text-right text-lg font-semibold text-gray-800">
+        Preço Total: R$ {{ totalPrice | number: '1.2-2' }}
+      </div>
+
+      <button
+        type="submit"
+        class="w-full px-4 py-2 text-white bg-purple-600 hover:bg-purple-700 rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 cursor-pointer"
+        [disabled]="availableTimes.length === 0 || appointmentForm.invalid"
+      >
+        Agendar
+      </button>
+    </form>
+  </div>
+</div>

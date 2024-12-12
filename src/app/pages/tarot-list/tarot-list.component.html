@@ -1,0 +1,54 @@
+<div class="flex flex-col w-full justify-center items-center">
+  <div class="flex flex-row gap-3 items-center justify-center pt-10 px-20 md:px-40">
+    <h1 class="text-purple-950 text-base font-medium text-center">
+      Escolha um TARÓLOGO e explore suas dúvidas com total confidencialidade e
+      segurança. Nossa plataforma garante privacidade, permitindo que você
+      pergunte sobre Amor, Carreira, Relacionamentos, Negócios e qualquer
+      questão que pesa em seu coração. Vá em busca das respostas que você
+      merece!
+    </h1>
+  </div>
+
+  <div class="flex flex-row gap-3 items-center justify-center p-10">
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+    <h1 class="text-purple-950 text-2xl font-medium font-serif">
+      TAROT ONLINE
+    </h1>
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+  </div>
+
+  <div
+    class="relative w-full flex justify-center items-center overflow-hidden mb-10"
+  >
+    <!-- Carousel -->
+    <div
+      #carousel
+      class="flex items-center gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+      style="max-width: 80%; padding: 1rem"
+    >
+      <app-consultant-card
+        *ngFor="let consultant of consultants"
+        class="snap-start flex-shrink-0 w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
+        consultantId="{{ consultant.id }}"
+        consultantName="{{ consultant.user.name }}"
+        consultantPrice="{{ consultant.price }}"
+        consultantSpecialties="{{ consultant.specialties }}"
+        imageUrl="{{ consultant.imageUrl }}"
+      ></app-consultant-card>
+    </div>
+
+    <!-- Botões de Navegação -->
+    <button
+      (click)="scrollLeft()"
+      class="absolute md:left-8 left-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10094;
+    </button>
+    <button
+      (click)="scrollRight()"
+      class="absolute md:right-8 right-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10095;
+    </button>
+  </div>
+</div>

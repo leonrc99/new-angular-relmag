@@ -1,0 +1,33 @@
+<div
+  class="flex flex-col justify-around items-center h-96 w-60 px-6 py-4 border rounded-md bg-white border-purple-900 text-center cursor-pointer hover:w-64 hover:h-[25rem] transition-all"
+>
+  <img
+    class="w-44 border rounded-md border-purple-900"
+    src="https://placehold.co/200x200"
+    alt=""
+    routerLink="/product/{{ productId }}"
+  />
+  <h3
+    class="text-xl font-bold text-purple-900"
+    routerLink="/product/{{ productId }}"
+  >
+    {{ productName }}
+  </h3>
+  <div
+    class="flex flex-col justify-center items-center gap-0"
+    routerLink="/product/{{ productId }}"
+  >
+    <p class="text-xs font-light text-purple-900">Por apenas</p>
+    <p class="text-lg font-semibold text-purple-900">
+      {{ productPrice | currency : "BRL" }}
+    </p>
+    <p class="text-xs font-light text-purple-900">em até 12x</p>
+  </div>
+  <button
+    class="border-purple-900 cursor-pointer bg-white w-50 text-purple-900 border py-1 px-8 rounded-full text-sm font-semibold hover:text-white hover:bg-purple-900 transition"
+    [disabled]="!userId"
+    (click)="addItemToCart(userId, productId, 1)"
+  >
+    Comprar Agora
+  </button>
+</div>

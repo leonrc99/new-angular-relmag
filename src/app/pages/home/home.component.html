@@ -1,0 +1,132 @@
+<div class="flex flex-col w-full justify-center items-center">
+  <!-- DESTAQUES -->
+  <div class="flex flex-row gap-3 items-center justify-center p-8">
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+    <h1 class="text-purple-950 text-2xl font-medium font-serif">DESTAQUES</h1>
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+  </div>
+  <div class="relative w-full flex justify-center items-center overflow-hidden">
+    <!-- Carousel -->
+    <div
+      #carousel
+      class="flex items-center gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+      style="max-width: 80%; padding: 1rem"
+    >
+      <app-product-card
+        *ngFor="let product of featuredProducts"
+        class="snap-start flex-shrink-0 w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
+        productName="{{ product.name }}"
+        productDescription="{{ product.description }}"
+        productPrice="{{ product.price }}"
+        productId="{{ product.id }}"
+        userId="{{ userId }}"
+      ></app-product-card>
+    </div>
+
+    <!-- Botões de Navegação -->
+    <button
+      (click)="scrollLeft()"
+      class="absolute md:left-8 left-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10094;
+    </button>
+    <button
+      (click)="scrollRight()"
+      class="absolute md:right-8 right-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10095;
+    </button>
+  </div>
+
+  <!-- CATEGORIAS EM DESTAQUE -->
+  <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 m-8">
+    <app-category-card
+      categoryName="ANTIQUÁRIO"
+      imageUrl="{{ swordImage }}"
+    ></app-category-card>
+    <app-category-card
+      categoryName="HARRY POTTER"
+      imageUrl="{{ hpImage }}"
+    ></app-category-card>
+  </div>
+
+  <!-- EXCLUSIVOS -->
+  <div class="flex flex-row gap-3 items-center justify-center p-8">
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+    <h1 class="text-purple-950 text-2xl font-medium font-serif">ESPECIAIS</h1>
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+  </div>
+  <div class="relative w-full flex justify-center items-center overflow-hidden">
+    <!-- Carousel -->
+    <div
+      #carousel
+      class="flex items-center gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory"
+      style="max-width: 80%; padding: 1rem"
+    >
+      <app-product-card
+        *ngFor="let product of specialProducts"
+        class="snap-start flex-shrink-0 w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
+        productName="{{ product.name }}"
+        productDescription="{{ product.description }}"
+        productPrice="{{ product.price }}"
+        productId="{{ product.id }}"
+        userId="{{ userId }}"
+      ></app-product-card>
+    </div>
+
+    <!-- Botões de Navegação -->
+    <button
+      (click)="scrollLeft()"
+      class="absolute md:left-8 left-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10094;
+    </button>
+    <button
+      (click)="scrollRight()"
+      class="absolute md:right-8 right-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10095;
+    </button>
+  </div>
+
+  <!-- HARRY POTTER -->
+  <div class="flex flex-row gap-3 items-center justify-center p-8">
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+    <h1 class="text-purple-950 text-2xl font-medium font-serif">
+      HARRY POTTER
+    </h1>
+    <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+  </div>
+  <div class="relative w-full flex justify-center items-center overflow-hidden">
+    <!-- Carousel -->
+    <div
+      #carousel
+      class="flex items-center gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory"
+      style="max-width: 80%; padding: 1rem"
+    >
+      <app-product-card
+        *ngFor="let product of hpProducts"
+        class="snap-start flex-shrink-0 w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
+        productName="{{ product.name }}"
+        productDescription="{{ product.description }}"
+        productPrice="{{ product.price }}"
+        productId="{{ product.id }}"
+        userId="{{ userId }}"
+      ></app-product-card>
+    </div>
+
+    <!-- Botões de Navegação -->
+    <button
+      (click)="scrollLeft()"
+      class="absolute md:left-8 left-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10094;
+    </button>
+    <button
+      (click)="scrollRight()"
+      class="absolute md:right-8 right-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+    >
+      &#10095;
+    </button>
+  </div>
+</div>
