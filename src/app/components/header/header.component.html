@@ -154,33 +154,12 @@
                 *ngIf="isDropdownOpen['banhos']"
                 class="absolute z-10 mt-2 w-44 bg-purple-900 rounded shadow-lg cursor-pointer"
               >
-                <ul class="py-1">
+                <ul *ngFor="let category of banhos" class="py-1">
                   <li>
                     <a
-                      (click)="goToPage('/category/1')"
+                      (click)="goToPage('/category/' + category.id)"
                       class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Proteção</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/2')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Limpeza Espiritual</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/3')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Prosperidade</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/4')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Descarrego</a
+                      >{{ category.name }}</a
                     >
                   </li>
                 </ul>
@@ -202,36 +181,15 @@
                 *ngIf="isDropdownOpen['antiquario']"
                 class="absolute z-10 mt-2 w-44 bg-purple-900 rounded shadow-lg cursor-pointer"
               >
-                <ul class="py-1">
-                  <li>
-                    <a
-                      (click)="goToPage('/category/1')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Proteção</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/2')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Limpeza Espiritual</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/3')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Prosperidade</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/4')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Descarrego</a
-                    >
-                  </li>
-                </ul>
+              <ul *ngFor="let category of antiquario" class="py-1">
+                <li>
+                  <a
+                    (click)="goToPage('/category/' + category.id)"
+                    class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
+                    >{{ category.name }}</a
+                  >
+                </li>
+              </ul>
               </div>
             </li>
 
@@ -247,36 +205,15 @@
                 *ngIf="isDropdownOpen['feiticos']"
                 class="absolute z-10 mt-2 w-44 bg-purple-900 rounded shadow-lg cursor-pointer"
               >
-                <ul class="py-1">
-                  <li>
-                    <a
-                      (click)="goToPage('/category/1')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Proteção</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/2')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Limpeza Espiritual</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/3')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Prosperidade</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/4')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Descarrego</a
-                    >
-                  </li>
-                </ul>
+              <ul *ngFor="let category of feiticos" class="py-1">
+                <li>
+                  <a
+                    (click)="goToPage('/category/' + category.id)"
+                    class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
+                    >{{ category.name }}</a
+                  >
+                </li>
+              </ul>
               </div>
             </li>
 
@@ -292,36 +229,15 @@
                 *ngIf="isDropdownOpen['seres']"
                 class="absolute z-10 mt-2 w-44 bg-purple-900 rounded shadow-lg cursor-pointer"
               >
-                <ul class="py-1">
-                  <li>
-                    <a
-                      (click)="goToPage('/category/1')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Proteção</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/2')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Limpeza Espiritual</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/3')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Prosperidade</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/4')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Descarrego</a
-                    >
-                  </li>
-                </ul>
+              <ul *ngFor="let category of seres" class="py-1">
+                <li>
+                  <a
+                    (click)="goToPage('/category/' + category.id)"
+                    class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
+                    >{{ category.name }}</a
+                  >
+                </li>
+              </ul>
               </div>
             </li>
 
@@ -337,36 +253,15 @@
                 *ngIf="isDropdownOpen['hp']"
                 class="absolute z-10 mt-2 w-44 bg-purple-900 rounded shadow-lg cursor-pointer"
               >
-                <ul class="py-1">
-                  <li>
-                    <a
-                      (click)="goToPage('/category/1')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Proteção</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/2')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Limpeza Espiritual</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/3')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Prosperidade</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/4')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Descarrego</a
-                    >
-                  </li>
-                </ul>
+              <ul *ngFor="let category of hp" class="py-1">
+                <li>
+                  <a
+                    (click)="goToPage('/category/' + category.id)"
+                    class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
+                    >{{ category.name }}</a
+                  >
+                </li>
+              </ul>
               </div>
             </li>
 
@@ -385,36 +280,15 @@
                 *ngIf="isDropdownOpen['suprimentos']"
                 class="absolute z-10 mt-2 w-44 bg-purple-900 rounded shadow-lg cursor-pointer"
               >
-                <ul class="py-1">
-                  <li>
-                    <a
-                      (click)="goToPage('/category/1')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Proteção</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/2')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Limpeza Espiritual</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/3')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Prosperidade</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      (click)="goToPage('/category/4')"
-                      class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
-                      >Descarrego</a
-                    >
-                  </li>
-                </ul>
+              <ul *ngFor="let category of suprimentos" class="py-1">
+                <li>
+                  <a
+                    (click)="goToPage('/category/' + category.id)"
+                    class="block text-white hover:bg-purple-800 px-4 py-2 text-sm"
+                    >{{ category.name }}</a
+                  >
+                </li>
+              </ul>
               </div>
             </li>
 
