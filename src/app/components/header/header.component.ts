@@ -2,6 +2,7 @@ import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -16,11 +17,22 @@ export class HeaderComponent implements OnInit {
   userName: any;
   isMobileMenuOpen = false;
   isDropdownOpen: { [key: string]: boolean } = {};
+  banhos: any[] = [];
+  antiquario: any[] = [];
+  feiticos: any[] = [];
+  seres: any[] = [];
+  hp: any[] = [];
+  suprimentos: any[] = [];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private productSerivce: ProductService
+  ) {}
 
   ngOnInit() {
     this.getLoggedUser();
+    this.setMenuCategories();
   }
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -60,5 +72,18 @@ export class HeaderComponent implements OnInit {
     if (!isDropdown) {
       this.isDropdownOpen = {};
     }
+  }
+
+  setMenuCategories() {
+    this.productSerivce.getCategories().subscribe({
+      next: (categories: any[]) => {
+        this.banhos = categories.slice(0, 10);
+        this.antiquario = categories.slice(10, 22);
+        this.feiticos = categories.slice(22, 29);
+        this.seres = categories.slice(29, 36);
+        this.hp = categories.slice(36, 44);
+        this.suprimentos = categories.slice(44, 53);
+      },
+    });
   }
 }

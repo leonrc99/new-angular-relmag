@@ -10,6 +10,9 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { GuestGuard } from './services/guards/guest-guard.service';
 import { AuthGuard } from './services/guards/auth-guard.service';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { ConsultantDashboardComponent } from './pages/consultant-dashboard/consultant-dashboard.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { RoleGuard } from './services/guards/role-guard.service';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,5 +24,17 @@ export const routes: Routes = [
   { path: 'login', component: LoginPageComponent, canActivate: [GuestGuard] },
   { path: 'register', component: RegisterPageComponent,  canActivate: [GuestGuard] },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['ADMIN'] }, // Apenas admins têm acesso
+  },
+  {
+    path: 'consultant-dashboard',
+    component: ConsultantDashboardComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['CONSULTANT'] }, // Apenas consultores têm acesso
+  },
   { path: '**', redirectTo: '' }
 ];
