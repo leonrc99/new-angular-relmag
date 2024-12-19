@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit {
         this.feiticos = categories.slice(22, 29);
         this.seres = categories.slice(29, 36);
         this.hp = categories.slice(36, 44);
-        this.suprimentos = categories.slice(44, 53);
+        this.suprimentos = categories.slice(44, 54);
       },
     });
   }

@@ -13,6 +13,10 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { ConsultantDashboardComponent } from './pages/consultant-dashboard/consultant-dashboard.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { RoleGuard } from './services/guards/role-guard.service';
+import { SalesComponent } from './pages/admin-dashboard/sales/sales.component';
+import { UsersComponent } from './pages/admin-dashboard/users/users.component';
+import { ProductsComponent } from './pages/admin-dashboard/products/products.component';
+import { RevenueComponent } from './pages/admin-dashboard/revenue/revenue.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +33,12 @@ export const routes: Routes = [
     component: AdminDashboardComponent,
     canActivate: [RoleGuard],
     data: { roles: ['ADMIN'] }, // Apenas admins têm acesso
+    children: [
+      { path: 'sales', component: SalesComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'products', component: ProductsComponent },
+      { path: 'revenue', component: RevenueComponent }
+    ]
   },
   {
     path: 'consultant-dashboard',

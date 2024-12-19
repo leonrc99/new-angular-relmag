@@ -1,1 +1,23 @@
-<p>admin-dashboard works!</p>
+<div class="p-6 bg-purple-100 min-h-screen justify-center items-center">
+    <h1 class="text-2xl w-full text-center font-bold mb-6 text-purple-900">Dashboard do Administrador</h1>
+    <nav class="flex flex-row w-full mb-6 justify-center items-center">
+      <ul class="flex gap-4">
+        <li>
+          <a routerLink="sales" class="text-purple-500 hover:underline cursor-pointer">Resumo de Vendas</a>
+        </li>
+        <li>
+          <a routerLink="users" class="text-purple-500 hover:underline cursor-pointer">Gerenciar Usuários</a>
+        </li>
+        <li>
+          <a routerLink="products" class="text-purple-500 hover:underline cursor-pointer">Gerenciar Produtos</a>
+        </li>
+        <li>
+          <a routerLink="revenue" class="text-purple-500 hover:underline cursor-pointer">Faturamento</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="bg-white p-6 rounded shadow">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
