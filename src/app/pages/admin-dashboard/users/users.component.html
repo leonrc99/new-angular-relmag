@@ -1,1 +1,27 @@
-<p>users works!</p>
+<div>
+    <h2 class="text-xl font-semibold mb-4">Lista de Usuários</h2>
+    <table class="table-auto w-full border-collapse border border-gray-200">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border border-gray-300 p-2 text-left">ID</th>
+          <th class="border border-gray-300 p-2 text-left">Nome</th>
+          <th class="border border-gray-300 p-2 text-left">Email</th>          
+          <th class="border border-gray-300 p-2 text-left">Função</th>
+          <th class="border border-gray-300 p-2 text-left">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Usuários carregados dinamicamente -->
+        <tr *ngFor="let user of users" class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2">{{ user.id }}</td>
+          <td class="border border-gray-300 p-2">{{ user.name }}</td>
+          <td class="border border-gray-300 p-2">{{ user.email }}</td>          
+          <td class="border border-gray-300 p-2">{{ getUserRole(user.role) }}</td>
+          <td class="border border-gray-300 p-2">
+            <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Promover</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

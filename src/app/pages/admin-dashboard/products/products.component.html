@@ -1,1 +1,167 @@
-<p>products works!</p>
+<div class="p-6">
+  <div class="flex w-full justify-between">
+    <h1 class="text-2xl font-semibold mb-4">Lista de Produtos</h1>
+
+    <!-- Filtro por Categoria -->
+    <div class="mb-4 flex gap-4 items-center">
+      <label for="category" class="font-medium">Filtrar por Categoria:</label>
+      <select
+        id="category"
+        class="border border-gray-300 rounded p-2"
+        [(ngModel)]="selectedCategory"
+        (change)="onCategoryChange()"
+      >
+        <option [ngValue]="null">Todas as Categorias</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Botão para Adicionar Produto -->
+  <div class="mb-4 flex w-full justify-end">
+    <button
+      class="bg-green-500 text-white px-4 py-2 rounded"
+      (click)="openForm()"
+    >
+      + Adicionar Produto
+    </button>
+  </div>
+
+  <!-- Formulário para Adicionar/Editar Produto -->
+  <div *ngIf="showForm" class="p-4 border rounded bg-gray-100 mb-4">
+    <h2 class="text-xl font-semibold mb-4">
+      {{ isEditing ? "Editar Produto" : "Adicionar Produto" }}
+    </h2>
+    <form (ngSubmit)="submitForm()">
+      <div class="grid gap-4">
+        <div>
+          <label for="name" class="block font-medium">Nome</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="productForm.name"
+            name="name"
+            class="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div>
+          <label for="description" class="block font-medium">Descrição</label>
+          <textarea
+            id="description"
+            [(ngModel)]="productForm.description"
+            name="description"
+            class="w-full p-2 border rounded"
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label for="price" class="block font-medium">Preço</label>
+          <input
+            type="number"
+            id="price"
+            [(ngModel)]="productForm.price"
+            name="price"
+            class="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div>
+          <label for="stock" class="block font-medium">Estoque</label>
+          <input
+            type="number"
+            id="stock"
+            [(ngModel)]="productForm.stock"
+            name="stock"
+            class="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div>
+          <label for="category" class="block font-medium">Categoria</label>
+          <select
+            id="category"
+            [(ngModel)]="productForm.categoryId"
+            name="categoryId"
+            class="w-full p-2 border rounded"
+            required
+          >
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="images" class="block font-medium">Imagens</label>
+          <input
+            type="file"
+            id="images"
+            (change)="handleFileInput($event)"
+            class="w-full p-2 border rounded"
+            multiple
+          />
+        </div>
+
+        <div class="preview-images">
+          <img
+            *ngFor="let image of productForm.images"
+            [src]="image"
+            alt="Pré-visualização da imagem"
+          />
+        </div>
+        
+        <div class="flex justify-end">
+          <button
+            type="button"
+            class="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+            (click)="showForm = false"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            {{ isEditing ? "Atualizar" : "Adicionar" }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Tabela de Produtos -->
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full border-collapse border border-gray-300">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border border-gray-300 p-2 text-left">ID</th>
+          <th class="border border-gray-300 p-2 text-left">Nome</th>
+          <th class="border border-gray-300 p-2 text-left">Preço</th>
+          <th class="border border-gray-300 p-2 text-left">Categoria</th>
+          <th class="border border-gray-300 p-2 text-left">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="border border-gray-300 p-2">{{ product.id }}</td>
+          <td class="border border-gray-300 p-2">{{ product.name }}</td>
+          <td class="border border-gray-300 p-2">R$ {{ product.price }}</td>
+          <td class="border border-gray-300 p-2">{{ product.categoryName }}</td>
+          <td class="border border-gray-300 p-2">
+            <button
+              class="bg-yellow-500 text-white px-2 py-1 rounded"
+              (click)="openForm(product)"
+            >
+              Editar
+            </button>
+            <button class="bg-red-500 text-white px-2 py-1 rounded ml-2">
+              Excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
