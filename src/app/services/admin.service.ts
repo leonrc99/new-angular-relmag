@@ -54,4 +54,11 @@ export class AdminService {
       headers: this.getAuthHeaders(),
     });
   }
+
+  uploadImage(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/files/upload`, formData, {
+      headers: this.getAuthHeaders(),
+      withCredentials: true
+    });
+  }
 }
