@@ -7,14 +7,15 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './breadcrumb.component.html',
-  styleUrl: './breadcrumb.component.scss'
+  styleUrl: './breadcrumb.component.scss',
 })
 export class BreadcrumbComponent {
-  @Input() categoryName!: string
+  @Input() categoryName!: string;
+  @Input() productName!: string;
 
-  constructor(private router: Router){}
-  
+  constructor(private router: Router) {}
+
   public goToPage(path: string) {
-    this.router.navigate([path])
+    this.router.navigate([path]);
   }
 }

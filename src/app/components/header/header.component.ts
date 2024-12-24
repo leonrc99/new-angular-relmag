@@ -13,6 +13,9 @@ import { ProductService } from '../../services/product.service';
 })
 export class HeaderComponent implements OnInit {
   isUserLogged: boolean = false;
+  isAdmin: boolean = false;
+  isConsultant: boolean = false;
+  isUser: boolean = false;
   userInfo: any;
   userName: any;
   isMobileMenuOpen = false;
@@ -47,6 +50,21 @@ export class HeaderComponent implements OnInit {
 
     if (this.userInfo !== null) {
       this.userName = this.userInfo.name;
+
+      if(this.userInfo.role === 'ADMIN') {
+        this.isAdmin = true
+        this.isConsultant = false
+        this.isUser = false
+      } else if(this.userInfo.role === 'CONSULTANT') {
+        this.isAdmin = false
+        this.isConsultant = true
+        this.isUser = false
+      } else {
+        this.isAdmin = false
+        this.isConsultant = false
+        this.isUser = true
+      }
+
       return (this.isUserLogged = true);
     } else {
       return (this.isUserLogged = false);

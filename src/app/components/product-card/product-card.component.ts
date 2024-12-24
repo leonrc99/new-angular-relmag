@@ -16,6 +16,7 @@ export class ProductCardComponent {
   @Input() productDescription: any;
   @Input() productPrice: any;
   @Input() productId: any;
+  @Input() productImage: any;
   @Input() userId: any;
 
   constructor(

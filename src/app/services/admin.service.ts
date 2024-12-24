@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AdminService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = `http://ec2-44-211-119-13.compute-1.amazonaws.com:8080/api`;
 
   constructor(private http: HttpClient) {}
 
@@ -43,7 +43,7 @@ export class AdminService {
     return this.http.get(`${this.apiUrl}/product/${id}`);
   }
 
-  createProduct(formData: any): Observable<any> {
+  createProduct(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/product`, formData, {
       headers: this.getAuthHeaders(),
     });
@@ -55,10 +55,36 @@ export class AdminService {
     });
   }
 
-  uploadImage(formData: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/files/upload`, formData, {
+  // Método para obter todos os pedidos (vendas)
+  getOrdersByUser(userId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/orders?userId=${userId}`, {
       headers: this.getAuthHeaders(),
-      withCredentials: true
+    });
+  }
+
+  // Método para obter todos os produtos
+  getProducts(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/product`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  // Método para obter o carrinho de compras do usuário
+  getCart(userId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/cart/${userId}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  updateUserRole(userId: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/users/admin/${userId}`, data, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+  
+  createConsultant(userId: string, formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/tarot/consultants/${userId}`, formData, {
+      headers: this.getAuthHeaders(),
     });
   }
 }

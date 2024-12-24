@@ -1,5 +1,10 @@
 <div class="flex flex-row gap-2 py-10 md:px-20 px-20 text-purple-900">
     <p class="text-base font-normal cursor-pointer" (click)="goToPage('/')">Início</p>
     <p class="text-base font-normal cursor-pointer"> > </p>
-    <p class="text-base font-semibold cursor-pointer">{{ categoryName }}</p>    
+
+    <p *ngIf="productName" class="text-base font-normal">{{ categoryName }}</p>
+    <p *ngIf="!productName" class="text-base font-semibold">{{ categoryName }}</p>
+
+    <p *ngIf="productName" class="text-base font-normal"> > </p>
+    <p class="text-base font-semibold">{{ productName }}</p>       
 </div>

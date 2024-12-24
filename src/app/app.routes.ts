@@ -34,6 +34,7 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ['ADMIN'] }, // Apenas admins têm acesso
     children: [
+      { path: '', redirectTo: 'sales', pathMatch: 'full' },
       { path: 'sales', component: SalesComponent },
       { path: 'users', component: UsersComponent },
       { path: 'products', component: ProductsComponent },

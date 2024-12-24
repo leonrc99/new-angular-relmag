@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  styleUrl: './users.component.scss',
 })
 export class UsersComponent {
-  users: any[] = []
+  users: any[] = [];
+  selectedUser: any = null;
+  promotionData: any = {
+    role: '',
+    bio: '',
+    specialties: '',
+    price: null,
+    imageUrl: null,
+  };
 
-  constructor(private adminService: AdminService){
+  constructor(private adminService: AdminService) {
     this.getAllUsers();
   }
 
@@ -23,27 +32,80 @@ export class UsersComponent {
       },
       error: (err) => {
         console.error(err);
-      }
+      },
     });
   }
 
-  getUserRole(role: any): string | null {
-    const adminString: string = 'Administrador';
-    const consultantString: string = 'Tarólogo';
-    const userString: string = 'Usuário';
-    
-    if(role === 'ADMIN') {
-      return adminString;
+  getUserRole(role: any): string {
+    const rolesMap: { [key: string]: string } = {
+      ADMIN: 'Administrador',
+      CONSULTANT: 'Tarólogo',
+      USER: 'Usuário',
+    };
+    return rolesMap[role] || 'Role não definida';
+  }
+
+  openPromotionForm(user: any) {
+    this.selectedUser = user;
+    this.promotionData = {
+      role: '',
+      bio: '',
+      specialties: '',
+      price: null,
+      imageUrl: null,
+    };
+  }
+
+  closePromotionForm() {
+    this.selectedUser = null;
+    this.promotionData = {
+      role: '',
+      bio: '',
+      specialties: '',
+      price: null,
+      imageUrl: null,
+    };
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.promotionData.imageUrl = file;
+    }
+  }
+
+  submitPromotionForm() {
+    if (!this.promotionData.role) {
+      alert('Selecione uma função para o usuário.');
+      return;
     }
 
-    if(role === 'CONSULTANT') {
-      return consultantString;
-    }
+    const userId = this.selectedUser.id;
 
-    if(role === 'USER') {
-      return userString;
-    }
+    if (this.promotionData.role === 'ADMIN') {
+      this.adminService
+        .updateUserRole(userId, { role: 'ADMIN' })
+        .subscribe(() => this.closePromotionForm());
+    } else if (this.promotionData.role === 'CONSULTANT') {
+      if (
+        !this.promotionData.bio ||
+        !this.promotionData.specialties ||
+        !this.promotionData.price ||
+        !this.promotionData.imageUrl
+      ) {
+        alert('Preencha todos os campos para promover como consultor.');
+        return;
+      }
 
-    return 'Role não definida';
+      const formData = new FormData();
+      formData.append('bio', this.promotionData.bio);
+      formData.append('specialties', this.promotionData.specialties);
+      formData.append('price', this.promotionData.price.toString());
+      formData.append('image', this.promotionData.imageUrl);
+
+      this.adminService
+        .createConsultant(userId, formData)
+        .subscribe(() => this.closePromotionForm());
+    }
   }
 }

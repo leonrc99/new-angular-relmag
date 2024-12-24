@@ -104,14 +104,15 @@
           />
         </div>
 
-        <div class="preview-images">
+        <div class="preview-images flex gap-2">
           <img
             *ngFor="let image of productForm.images"
             [src]="image"
             alt="Pré-visualização da imagem"
-            class="w-32 h-32 object-cover"
+            class="w-20 h-20 object-cover rounded"
           />
         </div>
+        
         
         <div class="flex justify-end">
           <button
@@ -137,7 +138,7 @@
     <table class="table-auto w-full border-collapse border border-gray-300">
       <thead>
         <tr class="bg-gray-100">
-          <th class="border border-gray-300 p-2 text-left">ID</th>
+          <th class="border border-gray-300 p-2 text-left">Foto</th>
           <th class="border border-gray-300 p-2 text-left">Nome</th>
           <th class="border border-gray-300 p-2 text-left">Preço</th>
           <th class="border border-gray-300 p-2 text-left">Categoria</th>
@@ -146,7 +147,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of products">
-          <td class="border border-gray-300 p-2">{{ product.id }}</td>
+          <td class="border border-gray-300 p-2 w-20"><img src="{{ product.images[0] }}" alt=""></td>
           <td class="border border-gray-300 p-2">{{ product.name }}</td>
           <td class="border border-gray-300 p-2">R$ {{ product.price }}</td>
           <td class="border border-gray-300 p-2">{{ product.categoryName }}</td>

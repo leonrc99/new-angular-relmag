@@ -1,31 +1,115 @@
+<app-breadcrumb
+  [categoryName]="categoryName"
+  [productName]="product.name"
+></app-breadcrumb>
 
-<div *ngIf="isLoading" class="loading">
-    <p>Carregando produto...</p>
-  </div>
-  
-  <div *ngIf="!isLoading && product">
-    <div class="product-details">
-      <h1>{{ product.name }}</h1>
-      <div class="product-images">
-        <!-- Slider ou galeria de imagens -->
-        <img [src]="product.image" alt="{{ product.name }}" />
-      </div>
-      <p class="price">Preço: {{ product.price | currency: 'BRL' }}</p>
-      <p class="description">{{ product.description }}</p>
-  
-      <div class="actions">
-       <!--  <button (click)="addToCart()">Adicionar ao Carrinho</button> -->
-        <button>Comprar Agora</button>
+<div
+  *ngIf="isLoading"
+  class="flex items-center justify-center h-screen bg-purple-100"
+>
+  <p class="text-lg font-semibold text-purple-700">Carregando produto...</p>
+</div>
+
+<div *ngIf="!isLoading && product" class="container mx-auto p-4">
+  <!-- Produto Principal -->
+  <div
+    class="flex flex-col p-10 border border-purple-200 md:flex-row bg-white shadow-md rounded-lg overflow-hidden"
+  >
+    <!-- Imagem do Produto -->
+    <div class="md:w-1/2">
+      <div class="relative">
+        <img
+          *ngFor="let image of images; index as i"
+          [src]="image"
+          [alt]="product.name"
+          class="w-full border-2 border-purple-300 rounded-lg h-96 object-cover"
+          [class.hidden]="i !== activeImageIndex"
+        />
+        <div
+          class="absolute bottom-4 left-4 flex flex-row w-full gap-2 transition-all"
+        >
+          <img
+            *ngFor="let image of images; index as i"
+            [src]="image"
+            [alt]="'Thumbnail'"
+            class="w-16 h-16 object-cover border-2 rounded-lg cursor-pointer hover:opacity-75 transition-all"
+            (click)="changeActiveImage(i)"
+            [class.border-purple-500]="i === activeImageIndex"
+          />
+        </div>
       </div>
     </div>
-  
-    <div class="related-products" *ngIf="relatedProducts.length > 0">
-      <h2>Produtos Relacionados</h2>
-      <div class="product-card" *ngFor="let related of relatedProducts">
-        <img [src]="related.image" alt="{{ related.name }}" />
-        <h4>{{ related.name }}</h4>
-        <p>{{ related.price | currency: 'BRL' }}</p>
-        <button routerLink="/product/{{ related.id }}">Ver Detalhes</button>
+
+    <!-- Informações do Produto -->
+    <div class="md:w-1/2 p-6 space-y-8">
+      <h1 class="text-3xl font-bold text-purple-900 text-center md:text-start">
+        {{ product.name }}
+      </h1>
+      <p class="text-purple-700 text-center md:text-start">
+        {{ product.description }}
+      </p>
+      <p
+        class="text-2xl font-semibold text-purple-600 text-center md:text-start"
+      >
+        Preço: {{ product.price | currency : "BRL" }}
+      </p>
+
+      <div class="mt-4 flex flex-col gap-4 md:flex-row">
+        <button
+          class="bg-purple-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-purple-700 transition-all"
+        >
+          Comprar Agora
+        </button>
+        <button
+          class="border border-purple-600 text-purple-600 font-medium px-6 py-2 rounded-lg hover:bg-purple-100 transition-all"
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- Produtos Relacionados -->
+  <div class="mt-8">
+    <div class="flex flex-row gap-3 items-center justify-center p-8">
+      <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+      <h1 class="text-purple-950 text-2xl font-medium font-serif">DESTAQUES</h1>
+      <img class="w-10" src="assets/tarot-icons/tarot-card.svg" alt="" />
+    </div>
+    <div
+      class="relative w-full flex justify-center items-center overflow-hidden"
+    >
+      <!-- Carousel -->
+      <div
+        #carousel
+        class="flex items-center gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+        style="max-width: 80%; padding: 1rem"
+      >
+        <app-product-card
+          *ngFor="let product of relatedProducts"
+          class="snap-start flex-shrink-0 w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
+          productImage="{{ product.images[0] }}"
+          productName="{{ product.name }}"
+          productDescription="{{ product.description }}"
+          productPrice="{{ product.price }}"
+          productId="{{ product.id }}"
+          userId="{{ userId }}"
+        ></app-product-card>
+      </div>
+
+      <!-- Botões de Navegação -->
+      <button
+        (click)="scrollLeft()"
+        class="absolute md:left-8 left-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+      >
+        &#10094;
+      </button>
+      <button
+        (click)="scrollRight()"
+        class="absolute md:right-8 right-0 top-1/2 transform -translate-y-1/2 bg-purple-100 text-purple-900 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 transition"
+      >
+        &#10095;
+      </button>
+    </div>
+  </div>
+</div>

@@ -68,7 +68,7 @@ export class ProductsComponent {
     this.showForm = true;
     this.isEditing = !!product;
     if (product) {
-      this.productForm = { ...product, categoryId: product.category.id };
+      this.productForm = { ...product, categoryId: product.categoryId };
     } else {
       this.resetForm();
     }
@@ -88,42 +88,58 @@ export class ProductsComponent {
   }
 
   handleFileInput(event: any): void {
-    const files = event.target.files as FileList; // Confirma que o retorno é FileList
-    if (files) {
-      Array.from(files).forEach((file) => {
-        this.uploadImage(file); // Envia o arquivo para o backend
-      });
+    const files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      this.imageFiles.push(files[i]);
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.productForm.images.push(e.target.result); // Adiciona a pré-visualização
+      };
+      reader.readAsDataURL(files[i]);
     }
   }
-
-  uploadImage(file: File): void {
+  
+ submitForm(): void {
     const formData = new FormData();
-    formData.append('file', file);
 
-    this.adminService.uploadImage(formData).subscribe({
-      next: (response) => {
-        console.log('Upload com sucesso:', response);
-        this.productForm.images.push(response.imageUrl);
-      },
-      error: (err) => {
-        console.error('Erro ao fazer upload de imagem:', err);
-      },
-    });
-  }
+    // Adiciona os dados do produto como JSON
+    formData.append(
+      'product',
+      new Blob(
+        [
+          JSON.stringify({
+            name: this.productForm.name,
+            description: this.productForm.description,
+            price: this.productForm.price,
+            stock: this.productForm.stock,
+            categoryId: this.productForm.categoryId,
+          }),
+        ],
+        { type: 'application/json' }
+      )
+    );
 
-  submitForm(): void {
-    if (this.isEditing) {
-      this.adminService
-        .updateProduct(this.productForm.id, this.productForm)
-        .subscribe({
-          next: () => {
-            this.loadProducts();
-            this.showForm = false;
-          },
-          error: (err) => console.error('Erro ao atualizar produto:', err),
-        });
+    // Adiciona as imagens ou um valor vazio
+    if (this.imageFiles.length > 0) {
+      this.imageFiles.forEach((file) => {
+        formData.append('images', file);
+      });
     } else {
-      this.adminService.createProduct(this.productForm).subscribe({
+      // Envia pelo menos uma entrada vazia para evitar o erro de parte ausente
+      formData.append('images', new Blob(), '');
+    }
+
+    // Chamada ao backend para editar ou criar
+    if (this.isEditing) {
+      this.adminService.updateProduct(this.productForm.id, formData).subscribe({
+        next: () => {
+          this.loadProducts();
+          this.showForm = false;
+        },
+        error: (err) => console.error('Erro ao atualizar produto:', err),
+      });
+    } else {
+      this.adminService.createProduct(formData).subscribe({
         next: () => {
           this.loadProducts();
           this.showForm = false;
@@ -132,4 +148,5 @@ export class ProductsComponent {
       });
     }
   }
+
 }

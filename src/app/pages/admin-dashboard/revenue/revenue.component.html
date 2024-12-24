@@ -1,1 +1,21 @@
-<p>revenue works!</p>
+<div class="p-6">
+    <h2 class="text-xl font-bold mb-4 text-purple-700">Faturamento</h2>
+  
+    <!-- Gráfico de Faturamento -->
+    <div class="bg-purple-100 p-4 rounded shadow mb-6">
+      <h3 class="text-sm font-semibold mb-2 text-purple-900">Faturamento Mensal</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+  
+    <!-- Resumo de Receita -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-green-200 text-green-900 p-4 rounded shadow">
+        <h3 class="text-sm font-semibold">Receita Total</h3>
+        <p class="text-2xl font-bold">{{ totalRevenue | currency: 'BRL' }}</p>
+      </div>
+      <div class="bg-blue-200 text-blue-900 p-4 rounded shadow">
+        <h3 class="text-sm font-semibold">Receita do Mês</h3>
+        <p class="text-2xl font-bold">{{ monthlyRevenue | currency: 'BRL' }}</p>
+      </div>
+    </div>
+  </div>

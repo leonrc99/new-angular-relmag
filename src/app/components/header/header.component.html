@@ -49,13 +49,32 @@
         *ngIf="isUserLogged"
       >
         <p class="text-lg text-center font-bold">Olá {{ userName }}, seja bem vindo!</p>
-        <div class="flex gap-2">
+        <div class="grid grid-cols-2 gap-2">
           <button
+          *ngIf="isUser"
             class="border-white border-2 py-1 px-8 rounded-full text-sm font-semibold hover:text-purple-900 hover:bg-white transition"
             (click)="goToPage('/profile')"
           >
             Perfil
           </button>
+
+          <button
+          *ngIf="isAdmin"
+            class="border-white border-2 py-1 px-8 rounded-full text-sm font-semibold hover:text-purple-900 hover:bg-white transition"
+            (click)="goToPage('/admin-dashboard')"
+          >
+            Dashboard
+          </button>
+
+
+          <button
+          *ngIf="isConsultant"
+            class="border-white border-2 py-1 px-8 rounded-full text-sm font-semibold hover:text-purple-900 hover:bg-white transition"
+            (click)="goToPage('/consultant-dashboard')"
+          >
+            Painel
+          </button>
+
           <button
             class="border-white border-2 py-1 px-8 rounded-full text-sm font-semibold hover:text-purple-900 hover:bg-white transition"
             (click)="logout()"

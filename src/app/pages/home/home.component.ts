@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   userInfo: any;
   userName: any;
   userId: any;
+  cardImage: any;
   cardWidth = 0;
 
   hpImage: string =
@@ -64,8 +65,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   loadProducts() {
     this.loggedUser();
 
-    this.productService.getFeaturedProducts().subscribe((products) => {
+    this.productService.getFeaturedProducts().subscribe((products: any) => {
       this.featuredProducts = products;
+      this.featuredProducts.map(res => {
+        this.cardImage = res.images[0]
+      })
       this.recalculateCardWidth();
     });
 
@@ -106,8 +110,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const cardElement =
         this.carousel.nativeElement.querySelector('app-product-card');
       if (cardElement) {
-        this.cardWidth = cardElement.offsetWidth + 16; // Largura + gap
-        console.log('Card width recalculated:', this.cardWidth); // Verifique a largura do card
+        this.cardWidth = cardElement.offsetWidth + 16;
       }
     });
   }

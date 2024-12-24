@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080'; // Atualize conforme necessário
+  private apiUrl = 'http://ec2-44-211-119-13.compute-1.amazonaws.com:8080'; // Atualize conforme necessário
   private token: any;  
   private userSubject = new BehaviorSubject<any>(null);
 

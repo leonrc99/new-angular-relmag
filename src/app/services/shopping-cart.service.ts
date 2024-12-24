@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  private apiUrl = 'http://localhost:8080/api'; // URL base da API
+  private apiUrl = 'http://ec2-44-211-119-13.compute-1.amazonaws.com:8080/api'; // URL base da API
   private token: any;
 
   constructor(private http: HttpClient) {
