@@ -84,7 +84,7 @@ export class AdminService {
   
   createConsultant(userId: string, formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/tarot/consultants/${userId}`, formData, {
-      headers: this.getAuthHeaders(),
+      headers: this.getAuthHeaders(), // Sem definir manualmente o Content-Type
     });
   }
 }

@@ -21,7 +21,6 @@ export class ProductCardComponent {
 
   constructor(
     private cartService: ShoppingCartService,
-    private authService: AuthService,
     private router: Router
   ) {}
 

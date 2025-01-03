@@ -21,6 +21,8 @@ export class UsersComponent {
     imageUrl: null,
   };
 
+  imageFile!: File;
+
   constructor(private adminService: AdminService) {
     this.getAllUsers();
   }
@@ -65,6 +67,8 @@ export class UsersComponent {
       price: null,
       imageUrl: null,
     };
+
+    this.getAllUsers();
   }
 
   onFileSelected(event: any) {
@@ -98,9 +102,21 @@ export class UsersComponent {
       }
 
       const formData = new FormData();
-      formData.append('bio', this.promotionData.bio);
-      formData.append('specialties', this.promotionData.specialties);
-      formData.append('price', this.promotionData.price.toString());
+
+      formData.append(
+        'consultant',
+        new Blob(
+          [
+            JSON.stringify({
+              bio: this.promotionData.bio,
+              specialties: this.promotionData.specialties,
+              price: this.promotionData.price,
+            }),
+          ],
+          { type: 'application/json' }
+        )
+      );
+
       formData.append('image', this.promotionData.imageUrl);
 
       this.adminService
